@@ -10,7 +10,7 @@ import sqlite3
 conn = sqlite3.connect("temperatures.db")
 cursor = conn.cursor()
 
-# ---------- 2. Create table (NO triple quotes) ----------
+# for table 
 cursor.execute(
     "CREATE TABLE IF NOT EXISTS TemperatureReadings ("
     "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -18,13 +18,15 @@ cursor.execute(
     "Temperature_Value REAL);"
 )
 
-# ---------- 3. Insert data from the input file ----------
+# data from assignment 5 file
 with open("Assignment5input.txt", "r") as file:
     for line in file:
         parts = line.strip().split()
         if len(parts) == 2:
             day = parts[0]
             temp = float(parts[1])
+
+            
             cursor.execute(
                 "INSERT INTO TemperatureReadings (Day_Of_Week, Temperature_Value) "
                 "VALUES (?, ?);",
@@ -33,18 +35,17 @@ with open("Assignment5input.txt", "r") as file:
 
 conn.commit()
 
-# ---------- 4. Compute averages (NO triple quotes) ----------
+
 cursor.execute(
     "SELECT AVG(Temperature_Value) FROM TemperatureReadings WHERE Day_Of_Week = 'Sunday';"
 )
 avg_sunday = cursor.fetchone()[0]
-
 cursor.execute(
     "SELECT AVG(Temperature_Value) FROM TemperatureReadings WHERE Day_Of_Week = 'Thursday';"
 )
 avg_thursday = cursor.fetchone()[0]
 
-# ---------- Print results ----------
+
 print(f"Average Sunday Temperature: {avg_sunday:.2f}")
 print(f"Average Thursday Temperature: {avg_thursday:.2f}")
 
