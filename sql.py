@@ -46,7 +46,8 @@ cursor.execute(
 avg_thursday = cursor.fetchone()[0]
 
 
-print(f"Average Sunday Temperature: {avg_sunday:.2f}")
+
 print(f"Average Thursday Temperature: {avg_thursday:.2f}")
+print(f"Average Sunday Temperature: {avg_sunday:.2f}")
 
 conn.close()
