@@ -6,7 +6,7 @@
 # Purpose: Python program to create and interact with a database. 
 import sqlite3
 
-# ---------- 1. Create SQLite database ----------
+
 conn = sqlite3.connect("temperatures.db")
 cursor = conn.cursor()
 
